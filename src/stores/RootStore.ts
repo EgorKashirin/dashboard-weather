@@ -1,5 +1,10 @@
+import { DashboardStore } from "stores/DashboardStore";
+
 export class RootStore {
-  constructor() {}
+  dashboardStore: DashboardStore;
+  constructor() {
+    this.dashboardStore = new DashboardStore();
+  }
 }
 declare global {
   interface Window {

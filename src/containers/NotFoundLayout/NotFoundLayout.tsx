@@ -6,7 +6,7 @@ export const NotFoundLayout: FC = () => {
     <>
       <Title>404 Error Page</Title>
       <ZoomArea>
-        <b>CSS</b> animations to make a cool 404 page.
+        <b>Page</b>not found.
       </ZoomArea>
       <ErrorContainer>
         <Four>

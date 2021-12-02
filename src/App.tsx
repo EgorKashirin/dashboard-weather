@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       {stores && (
-        <Provider>
+        <Provider store={stores}>
           <ThemeProvider theme={{}}>
             <Routes />
             <GlobalStyles />
