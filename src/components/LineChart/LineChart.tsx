@@ -28,9 +28,9 @@ export const LineChart: FC<LineChartProps> = memo((props) => {
   const { labels = [], data = [], xAxes, yAxes, typeChart = typesChart.line, graphLimits = false } = props;
   let myColors: string[];
   if (!graphLimits) {
-    myColors = ["#ff6358", "#ffd246", "#78d237", "#28b4c8", "#2d73f5", "#aa46be", "#2CCCE4", "#003f5c", "#FF8A65", "#795548", "#1367b6", "#af073d", "#8ED1FC"];
+    myColors = ["#644ded", "#ff6358", "#ffd246", "#78d237", "#28b4c8", "#2d73f5", "#aa46be", "#2CCCE4", "#003f5c", "#FF8A65", "#795548", "#1367b6", "#af073d", "#8ED1FC"];
   } else {
-    myColors = ["#ff6358", "#ff6358", "#78d237", "#28b4c8", "#2d73f5", "#aa46be", "#2CCCE4", "#003f5c", "#FF8A65", "#795548", "#1367b6", "#af073d", "#8ED1FC"];
+    myColors = ["#644ded", "#ff6358", "#ff6358", "#78d237", "#28b4c8", "#2d73f5", "#aa46be", "#2CCCE4", "#003f5c", "#FF8A65", "#795548", "#1367b6", "#af073d", "#8ED1FC"];
   }
 
   const customColorFunction = useCallback((schemeColors) => {
@@ -75,7 +75,7 @@ export const LineChart: FC<LineChartProps> = memo((props) => {
           plugins: {
             colorschemes: {
               scheme: SetThree12,
-              override: true,
+              override: false,
               reverse: false,
               custom: customColorFunction,
             },

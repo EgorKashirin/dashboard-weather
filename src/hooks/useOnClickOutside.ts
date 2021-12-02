@@ -1,9 +1,14 @@
 import { FC, useEffect } from "react";
 
-export const useOnClickOutside: FC = (ref, handler) => {
+interface UseOnClickOutsideProps {
+  ref: any;
+  handler: () => void;
+}
+
+export const useOnClickOutside: FC<UseOnClickOutsideProps> = (ref, handler) => {
   useEffect(() => {
-    const listener = (event) => {
-      if (!ref.current || ref.current.contains(event.target)) {
+    const listener = (event: MouseEvent | TouchEvent): void => {
+      if (!ref?.current || ref?.current?.contains(event.target)) {
         return;
       }
       handler(event);

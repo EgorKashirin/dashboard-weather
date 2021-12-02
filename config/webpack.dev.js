@@ -1,3 +1,4 @@
+require('dotenv').config()
 const webpack = require("webpack");
 const path = require("path");
 const { merge } = require("webpack-merge");
@@ -58,7 +59,8 @@ module.exports = merge(common, {
       patterns: [{ from: "public", to: "build" }],
     }),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.NODE_ENV": JSON.stringify("development"),
+      "process.env.API_KEY": JSON.stringify(process.env.API_KEY)
     }),
 
     new MiniCssExtractPlugin({

@@ -1,37 +1,44 @@
-import React, { useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { useOnClickOutside } from "hooks/useOnClickOutside";
 
-export const Combobox = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+interface ComboboxProps {
+  selectedItem: string | number;
+  onChange: () => void;
+  items: [{ value: string | number; label: number }];
+  placeholder: string;
+}
 
-  const items = [
-    { value: 1, label: "1" },
-    { value: 2, label: "2" },
-    { value: 3, label: "3" },
-    { value: 4, label: "4" },
-    { value: 5, label: "5" },
-    { value: 6, label: "6" },
-    { value: 7, label: "7" },
-    { value: 8, label: "8" },
-    { value: 9, label: "9" },
-    { value: 10, label: "10" },
-    { value: 11, label: "11" },
-    { value: 12, label: "12" },
-  ];
+export const Combobox: FC<ComboboxProps> = ({ selectedItem = 2, onChange, items = [], placeholder = "" }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const refCombobox = useRef();
+  const refCombobox = useRef<HTMLDivElement>();
 
   useOnClickOutside(refCombobox, () => setIsOpen(false));
 
+  const getTitleSelected = () => {
+    return items.find(({ value }) => value === selectedItem).label;
+  };
+
+  const changeItem = (value) => {
+    if (onChange) {
+      onChange(value);
+    }
+  };
+
   return (
     <Wrapper ref={refCombobox} onClick={() => setIsOpen((prev) => !prev)} isOpen={isOpen}>
-      <PlaceholderWrapper>Выберите город</PlaceholderWrapper>
-      <SelectedLabel>Moscow</SelectedLabel>
+      {placeholder.length > 0 && <PlaceholderWrapper>{placeholder}</PlaceholderWrapper>}
+      <SelectedLabel>{getTitleSelected()}</SelectedLabel>
+      <Icon>{isOpen ? "↑" : "↓"}</Icon>
       {isOpen && (
         <ListItems>
           {items.map(({ value, label }) => {
-            return <ListItem key={`ListItem=${value}`}>{label}</ListItem>;
+            return (
+              <ListItem onClick={() => changeItem(value)} key={`ListItem=${value}`}>
+                {label}
+              </ListItem>
+            );
           })}
         </ListItems>
       )}
@@ -81,7 +88,7 @@ const SelectedLabel = styled.div`
 
 const ListItems = styled.div`
   width: 235px;
-  min-height: 60px;
+  min-height: 40px;
   max-height: 215px;
   border: solid 1px #e0e0e0;
   position: absolute;
@@ -93,7 +100,7 @@ const ListItems = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-  padding: 0 6px;
+  padding: 6px;
 `;
 
 const ListItem = styled.div`
@@ -109,4 +116,10 @@ const ListItem = styled.div`
     border-radius: 6px;
     color: #644ded;
   }
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `;
