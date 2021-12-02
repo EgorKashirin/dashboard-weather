@@ -1,7 +1,7 @@
-import { FC, useEffect } from "react";
+import { FC, RefObject, useEffect } from "react";
 
 interface UseOnClickOutsideProps {
-  ref: any;
+  ref: RefObject<HTMLDivElement>;
   handler: () => void;
 }
 

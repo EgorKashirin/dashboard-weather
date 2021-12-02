@@ -1,5 +1,7 @@
-import { observable, action, reaction } from "mobx";
+import { InformationHoursProps, MinutelyProps } from "api/dashboardManager";
+import { observable, action } from "mobx";
 import { apiManager } from "~/api";
+import { AxiosResponse } from "axios";
 
 export class DashboardStore {
   @observable isLoading;
@@ -16,15 +18,15 @@ export class DashboardStore {
   async init(CITY: string, API_KEY: string) {
     try {
       this.isLoading = true;
-      const { data, minutely } = await apiManager.dashboardManager.getInformationHours({ city: CITY, key: API_KEY });
-      this.dataWeather = data[0];
+      const { data, minutely }: AxiosResponse<InformationHoursProps> = await apiManager.dashboardManager.getInformationHours({ city: CITY, key: API_KEY });
+      this.dataWeather = data[0] ?? {};
 
       this.minutely = {
         labels: this.convertTime(minutely),
         data: [
           {
             label: "Изменение температуры по минутам",
-            data: minutely.map((item) => {
+            data: minutely.map((item: MinutelyProps) => {
               return String(item.temp);
             }),
           },

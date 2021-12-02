@@ -31,12 +31,14 @@ export const Dashboard: FC = observer(() => {
     { value: "istanbul", label: "🇹🇷 Стамбул", country: "TR" },
   ];
 
+  const srcImage = dataWeather?.weather?.icon ? pictures[dataWeather?.weather?.icon] : "";
+
   return (
     <Container>
       {isLoading && <Loader spinnerSize={100} hasOverlay />}
       <ToolBar>
         <LeftContainer>
-          <Picture src={pictures[dataWeather?.weather?.icon]} alt="picture" />
+          <Picture src={srcImage} alt="picture" />
           <>{dataWeather?.weather?.description}</>
           <Combobox
             placeholder="Выбирете город"

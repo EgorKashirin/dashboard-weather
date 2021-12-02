@@ -63,7 +63,7 @@ import t05n from "./t05n.png";
 import u00d from "./u00d.png";
 import u00n from "./u00n.png";
 
-export const pictures = {
+export const pictures: any = {
   a01d,
   a01n,
   a02d,

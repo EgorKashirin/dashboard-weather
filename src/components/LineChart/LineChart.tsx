@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useCallback, memo, FC } from "react";
+import { useRef, useLayoutEffect, useCallback, memo, FC, ChangeEvent } from "react";
 import { Container, EmptyData } from "./LineChart.style";
 
 import Chart from "chart.js";
@@ -36,8 +36,8 @@ export const LineChart: FC<LineChartProps> = memo((props) => {
   const customColorFunction = useCallback((schemeColors) => {
     return [...myColors, ...schemeColors];
   }, []);
-  const chartRef = useRef();
-  const instanceChart = useRef();
+  const chartRef = useRef<HTMLCanvasElement>(null);
+  const instanceChart = useRef<HTMLCanvasElement>(null);
 
   const convertedData = data.map((item) => {
     return { ...item, fill: false, pointRadius: 5, lineTension: 0 };
